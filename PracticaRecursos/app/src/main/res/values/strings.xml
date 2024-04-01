@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PracticaRecursos</string>
+    <string name="hola_mundo">Hola mundo</string>
+    <string name="iniciar_sesi_n">Iniciar Sesión</string>
+    <string name="password">Contraseña</string>
+    <string name="username">Nombre de Usuario</string>
+</resources>

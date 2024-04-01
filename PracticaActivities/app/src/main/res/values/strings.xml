@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">PracticaActivities</string>
+    <string name="ir_al_segundo_activity">Ir al segundo activity</string>
+    <string name="enviar">Enviar</string>
+    <string name="ingrese_su_nombre">Ingrese su nombre</string>
+</resources>

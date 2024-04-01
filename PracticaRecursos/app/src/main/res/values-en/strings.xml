@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PracticaRecursos</string>
+    <string name="hola_mundo">Hello World</string>
+    <string name="iniciar_sesi_n">Sign in</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+</resources>

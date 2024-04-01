@@ -1,0 +1,12 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.PracticaCalculadora" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+    <style name="Base.Theme.EstiloBotones" parent="Widget.Material3.Button">
+        <item name="android:backgroundTint">#972A2A</item>
+    </style>
+
+    <style name="Theme.PracticaCalculadora" parent="Base.Theme.PracticaCalculadora" />
+</resources>
