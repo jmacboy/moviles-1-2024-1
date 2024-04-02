@@ -5,4 +5,7 @@ class User {
     var lastName: String = ""
     var username: String = ""
     var password: String = ""
+    override fun toString(): String {
+        return "$name $lastName"
+    }
 }
