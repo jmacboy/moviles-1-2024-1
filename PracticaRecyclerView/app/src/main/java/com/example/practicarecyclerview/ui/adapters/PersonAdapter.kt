@@ -1,0 +1,55 @@
+package com.example.practicarecyclerview.ui.adapters
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.example.practicarecyclerview.databinding.PersonListItemBinding
+import com.example.practicarecyclerview.models.Person
+
+class PersonAdapter(
+    private val persons: List<Person>,
+    private val listener: OnPersonClickListener
+) : RecyclerView.Adapter<PersonAdapter.PersonViewHolder>() {
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonViewHolder {
+        val binding =
+            PersonListItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        return PersonViewHolder(binding.root)
+    }
+
+    override fun getItemCount(): Int {
+        return persons.size
+    }
+
+    override fun onBindViewHolder(holder: PersonViewHolder, position: Int) {
+        val person = persons[position]
+        holder.bind(person, listener)
+    }
+
+    class PersonViewHolder(itemView: View) :
+        RecyclerView.ViewHolder(itemView) {
+        fun bind(person: Person, listener: OnPersonClickListener) {
+            val binding = PersonListItemBinding.bind(itemView)
+            binding.lblPersonName.text = person.name
+            binding.lblPersonPhone.text = person.phone
+            binding.lblPersonPhone.setOnClickListener {
+                listener.onPersonClick(person)
+            }
+            binding.lblPersonName.setOnClickListener {
+                listener.onPersonClick(person)
+            }
+        }
+    }
+
+    interface OnPersonClickListener {
+        fun onPersonClick(person: Person)
+    }
+}
+
+

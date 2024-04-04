@@ -27,14 +27,26 @@ class WelcomeActivity : AppCompatActivity() {
 //        val user = intent.getStringExtra("user")
 //        binding.lblWelcome.text = "Bienvenido $user"
         setupListView()
+        setupViewModelObservers()
+    }
+
+    private fun setupViewModelObservers() {
+        model.personList.observe(this) {
+            val adapter = binding.lstUsers.adapter as UserArrayAdapter
+            adapter.clear()
+            if (it != null) {
+                adapter.addAll(it)
+            }
+        }
     }
 
     private fun setupListView() {
         val adapter = UserArrayAdapter(
             this,
             android.R.layout.simple_list_item_1,
-            FakeDB.users
+            mutableListOf()
         )
         binding.lstUsers.adapter = adapter
+        model.loadPersonList()
     }
 }
