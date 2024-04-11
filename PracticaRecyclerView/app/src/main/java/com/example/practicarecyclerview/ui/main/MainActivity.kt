@@ -1,9 +1,12 @@
 package com.example.practicarecyclerview.ui.main
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -13,11 +16,19 @@ import com.example.practicarecyclerview.R
 import com.example.practicarecyclerview.databinding.ActivityMainBinding
 import com.example.practicarecyclerview.models.Person
 import com.example.practicarecyclerview.ui.adapters.PersonAdapter
+import com.example.practicarecyclerview.ui.detail.DetailActivity
 
 class MainActivity : AppCompatActivity(), PersonAdapter.OnPersonClickListener {
     private lateinit var binding: ActivityMainBinding
     private val model: MainViewModel by viewModels()
-
+    var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            // There are no request codes
+            val data: Intent? = result.data
+            val person = data?.getSerializableExtra("person") as Person
+            model.updatePerson(person)
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -29,36 +40,24 @@ class MainActivity : AppCompatActivity(), PersonAdapter.OnPersonClickListener {
             insets
         }
         setupRecyclerView()
+        setupViewModelObservers()
+        model.loadPeople()
+    }
+
+    private fun setupViewModelObservers() {
+        model.personList.observe(this) {
+            val adapter = binding.lstPeople.adapter as PersonAdapter
+            adapter.clear()
+            if (it != null) {
+                adapter.addAll(it)
+            }
+        }
     }
 
     private fun setupRecyclerView() {
+
         val adapter = PersonAdapter(
-            mutableListOf(
-                Person(
-                    1,
-                    "Juan",
-                    "Perez",
-                    12,
-                    "juan@test.com",
-                    "123456"
-                ),
-                Person(
-                    2,
-                    "Maria",
-                    "Lopez",
-                    22,
-                    "maria@test.com",
-                    "1234567"
-                ),
-                Person(
-                    3,
-                    "Pedro",
-                    "Gomez",
-                    32,
-                    "pedro@test.com",
-                    "12345678"
-                )
-            ),
+            arrayListOf(),
             this
         )
         binding.lstPeople.adapter = adapter
@@ -68,7 +67,13 @@ class MainActivity : AppCompatActivity(), PersonAdapter.OnPersonClickListener {
     }
 
     override fun onPersonClick(person: Person) {
-        Log.d("MainActivity", "Person clicked: ${person.name}")
-        Toast.makeText(this, person.name, Toast.LENGTH_LONG).show()
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra("person", person)
+
+        resultLauncher.launch(intent)
+    }
+
+    override fun onPersonDeleteClick(person: Person) {
+        model.deletePerson(person)
     }
 }

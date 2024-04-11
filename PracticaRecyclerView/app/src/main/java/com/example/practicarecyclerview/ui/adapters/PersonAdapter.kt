@@ -8,7 +8,7 @@ import com.example.practicarecyclerview.databinding.PersonListItemBinding
 import com.example.practicarecyclerview.models.Person
 
 class PersonAdapter(
-    private val persons: List<Person>,
+    private val persons: ArrayList<Person>,
     private val listener: OnPersonClickListener
 ) : RecyclerView.Adapter<PersonAdapter.PersonViewHolder>() {
 
@@ -32,6 +32,16 @@ class PersonAdapter(
         holder.bind(person, listener)
     }
 
+    fun clear() {
+        persons.clear()
+        notifyDataSetChanged()
+    }
+
+    fun addAll(list: ArrayList<Person>) {
+        persons.addAll(list)
+        notifyDataSetChanged()
+    }
+
     class PersonViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         fun bind(person: Person, listener: OnPersonClickListener) {
@@ -44,11 +54,15 @@ class PersonAdapter(
             binding.lblPersonName.setOnClickListener {
                 listener.onPersonClick(person)
             }
+            binding.btnDeleteItem.setOnClickListener {
+                listener.onPersonDeleteClick(person)
+            }
         }
     }
 
     interface OnPersonClickListener {
         fun onPersonClick(person: Person)
+        fun onPersonDeleteClick(person: Person)
     }
 }
 
