@@ -14,7 +14,7 @@ class DetailFragment() : Fragment() {
     var personId: Int? = null
 
     companion object {
-        fun newInstance(person: Person): DetailFragment {
+        fun newInstance(person: Person?): DetailFragment {
             val fragment = DetailFragment()
             val args = Bundle()
             args.putSerializable("person", person)
@@ -32,11 +32,11 @@ class DetailFragment() : Fragment() {
     }
 
     private fun loadPersonDetails(person: Person) {
-        binding.txtPersonName.setText(person.name)
-        binding.txtLastName.setText(person.lastName)
-        binding.txtPersonAge.setText(person.age.toString())
-        binding.txtPersonEmail.setText(person.email)
-        binding.txtPersonPhone.setText(person.phone)
+        binding.txtPersonName.editText?.setText(person.name)
+        binding.txtLastName.editText?.setText(person.lastName)
+        binding.txtPersonAge.editText?.setText(person.age.toString())
+        binding.txtPersonEmail.editText?.setText(person.email)
+        binding.txtPersonPhone.editText?.setText(person.phone)
         this.personId = person.id
     }
 
@@ -60,11 +60,11 @@ class DetailFragment() : Fragment() {
         }
         binding.btnSaveDetail.setOnClickListener {
 
-            val name = binding.txtPersonName.text.toString()
-            val lastName = binding.txtLastName.text.toString()
-            val age = binding.txtPersonAge.text.toString().toInt()
-            val email = binding.txtPersonEmail.text.toString()
-            val phone = binding.txtPersonPhone.text.toString()
+            val name = binding.txtPersonName.editText?.text.toString()
+            val lastName = binding.txtLastName.editText?.text.toString()
+            val age = binding.txtPersonAge.editText?.text.toString().toInt()
+            val email = binding.txtPersonEmail.editText?.text.toString()
+            val phone = binding.txtPersonPhone.editText?.text.toString()
             val personIntent = Person(name, lastName, age, email, phone)
             personIntent.id = this.personId ?: 0
             val resultIntent = Intent()

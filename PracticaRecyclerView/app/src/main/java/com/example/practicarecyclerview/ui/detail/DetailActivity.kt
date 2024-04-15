@@ -16,7 +16,7 @@ class DetailActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             val person = intent.getSerializableExtra("person") as Person?
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, DetailFragment.newInstance(person!!))
+                .replace(R.id.container, DetailFragment.newInstance(person))
                 .commitNow()
         }
     }

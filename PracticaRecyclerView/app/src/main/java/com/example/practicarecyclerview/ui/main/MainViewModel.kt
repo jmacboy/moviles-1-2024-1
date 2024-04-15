@@ -51,4 +51,11 @@ class MainViewModel : ViewModel() {
         }
         _personList.value = list
     }
+
+    fun insertPerson(person: Person) {
+        val list = _personList.value
+        person.id = list?.size?.plus(1) ?: 0
+        list?.add(person)
+        _personList.value = list
+    }
 }

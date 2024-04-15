@@ -3,8 +3,6 @@ package com.example.practicarecyclerview.ui.main
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -21,12 +19,20 @@ import com.example.practicarecyclerview.ui.detail.DetailActivity
 class MainActivity : AppCompatActivity(), PersonAdapter.OnPersonClickListener {
     private lateinit var binding: ActivityMainBinding
     private val model: MainViewModel by viewModels()
-    var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    var updateLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             // There are no request codes
             val data: Intent? = result.data
             val person = data?.getSerializableExtra("person") as Person
             model.updatePerson(person)
+        }
+    }
+    var insertLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            // There are no request codes
+            val data: Intent? = result.data
+            val person = data?.getSerializableExtra("person") as Person
+            model.insertPerson(person)
         }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +47,15 @@ class MainActivity : AppCompatActivity(), PersonAdapter.OnPersonClickListener {
         }
         setupRecyclerView()
         setupViewModelObservers()
+        setupEventListeners()
         model.loadPeople()
+    }
+
+    private fun setupEventListeners() {
+        binding.btnAddPerson.setOnClickListener {
+            val intent = Intent(this, DetailActivity::class.java)
+            insertLauncher.launch(intent)
+        }
     }
 
     private fun setupViewModelObservers() {
@@ -70,7 +84,7 @@ class MainActivity : AppCompatActivity(), PersonAdapter.OnPersonClickListener {
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra("person", person)
 
-        resultLauncher.launch(intent)
+        updateLauncher.launch(intent)
     }
 
     override fun onPersonDeleteClick(person: Person) {
