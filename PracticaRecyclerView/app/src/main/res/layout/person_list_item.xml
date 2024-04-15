@@ -10,10 +10,11 @@
         android:id="@+id/lblPersonName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="TextView"
         app:layout_constraintEnd_toStartOf="@+id/btnDeleteItem"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgProfilePicture"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Juancito Pinto" />
 
@@ -21,10 +22,11 @@
         android:id="@+id/lblPersonPhone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:text="TextView"
         android:textSize="34sp"
         app:layout_constraintEnd_toStartOf="@+id/btnDeleteItem"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgProfilePicture"
         app:layout_constraintTop_toBottomOf="@+id/lblPersonName"
         tools:text="12345645324" />
 
@@ -35,5 +37,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_menu_delete" />
+
+    <ImageView
+        android:id="@+id/imgProfilePicture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

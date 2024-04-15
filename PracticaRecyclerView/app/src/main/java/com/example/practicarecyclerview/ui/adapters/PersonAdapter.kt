@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.practicarecyclerview.databinding.PersonListItemBinding
 import com.example.practicarecyclerview.models.Person
 
@@ -48,6 +49,9 @@ class PersonAdapter(
             val binding = PersonListItemBinding.bind(itemView)
             binding.lblPersonName.text = person.name
             binding.lblPersonPhone.text = person.phone
+            Glide.with(itemView.context)
+                .load(person.profilePicture)
+                .into(binding.imgProfilePicture);
             binding.lblPersonPhone.setOnClickListener {
                 listener.onPersonClick(person)
             }

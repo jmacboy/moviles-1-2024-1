@@ -10,4 +10,5 @@ class Person(
     var phone: String = ""
 ) : Serializable {
     var id = 0
+    var profilePicture = "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
 }
