@@ -45,5 +45,8 @@ class MainActivity : AppCompatActivity() {
         binding.btnMagenta.setOnClickListener {
             binding.lienzo.setColor(Color.MAGENTA)
         }
+        binding.fabUndo.setOnClickListener {
+            binding.lienzo.undo()
+        }
     }
 }
