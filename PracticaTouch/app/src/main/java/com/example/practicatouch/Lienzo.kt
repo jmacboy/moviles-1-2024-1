@@ -34,7 +34,7 @@ class Lienzo(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         paint.color = Color.WHITE
-        canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), paint)
+//        canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), paint)
         bitmap?.let {
             canvas.drawBitmap(it, 0f, 0f, null)
         }
@@ -96,6 +96,10 @@ class Lienzo(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
 
     fun undo() {
         bitmap = lastStatus?.copy(Bitmap.Config.ARGB_8888, true)
+        xOrigin = 0f
+        yOrigin = 0f
+        xDestination = 0f
+        yDestination = 0f
         invalidate()
     }
 }
