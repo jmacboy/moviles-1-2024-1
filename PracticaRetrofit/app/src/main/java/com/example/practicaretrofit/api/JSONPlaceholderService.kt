@@ -9,4 +9,7 @@ interface JSONPlaceholderService {
 
     @GET("posts/{id}")
     fun getPostById(@Path("id") id: Int): Call<Post>
+
+    @GET("posts")
+    fun getPostList(): Call<List<Post>>
 }
