@@ -19,7 +19,8 @@ data class Jewel(
             4 -> Color.GREEN
             5 -> Color.BLUE
             6 -> Color.YELLOW
-            else -> Color.BLACK
+            7 -> Color.CYAN
+            else -> Color.WHITE
         }
         paint.color = color
         canvas.drawRect(
