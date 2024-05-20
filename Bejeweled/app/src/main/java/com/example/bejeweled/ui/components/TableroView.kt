@@ -23,20 +23,16 @@ class TableroView(context: Context?, attrs: AttributeSet?) : View(context, attrs
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        if (event?.action == MotionEvent.ACTION_DOWN) {
-            val col = event.x.toInt() / (width / model.cols)
-            val row = event.y.toInt() / (height / model.rows)
-            Log.d("Selected", "x: $row, y: $col")
-            model.select(row, col)
-//            invalidate()
-        } else if (event?.action == MotionEvent.ACTION_UP) {
-            val col = event.x.toInt() / (width / model.cols)
-            val row = event.y.toInt() / (height / model.rows)
-            Log.d("Moved", "x: $row, y: $col")
-            model.move(row, col)
-            invalidate()
+        event?.let {
+            val col = it.x.toInt() / (width / model.cols)
+            val row = it.y.toInt() / (height / model.rows)
+            when (it.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    model.validateMove(row, col)
+                    invalidate()
+                }
+            }
         }
-
         return true
     }
 }

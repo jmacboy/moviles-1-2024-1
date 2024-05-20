@@ -3,6 +3,7 @@ package com.example.bejeweled.model
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.util.Log
 import kotlin.math.abs
 
 class Tablero {
@@ -12,34 +13,16 @@ class Tablero {
     private var selectedCol = -1
 
     // matriz llena de números del 1 al 7
-    var matriz: Array<Array<Jewel>> = arrayOf(
-        getJewelCol(0),
-        getJewelCol(1),
-        getJewelCol(2),
-        getJewelCol(3),
-        getJewelCol(4),
-        getJewelCol(5),
-        getJewelCol(6),
-        getJewelCol(7),
-        getJewelCol(8),
-    )
-
-    private fun getJewelCol(col: Int): Array<Jewel> {
-        return arrayOf(
-            Jewel(row = 0, col = col),
-            Jewel(row = 1, col = col),
-            Jewel(row = 2, col = col),
-            Jewel(row = 3, col = col),
-            Jewel(row = 4, col = col),
-            Jewel(row = 5, col = col),
-            Jewel(row = 6, col = col),
-            Jewel(row = 7, col = col)
-        )
+    var matriz: Array<Array<Jewel>> = Array(rows) { row ->
+        Array(cols) { col ->
+            Jewel(row = row, col = col)
+        }
     }
 
     fun select(row: Int, col: Int) {
         selectedRow = row
         selectedCol = col
+        matriz[row][col].selected = true
         printBoard()
     }
 
@@ -48,12 +31,13 @@ class Tablero {
         val difY = col - selectedCol
         if (selectedRow != -1 && selectedCol != -1 && abs(difX) + abs(difY) == 1) {
             val jewel = matriz[selectedRow][selectedCol]
-            matriz[selectedRow][selectedCol] = matriz[row][col]
-            matriz[row][col] = jewel
+            jewel.selected = false
+            matriz[selectedRow][selectedCol] = matriz[row][col].copy(row = selectedRow, col = selectedCol)
+            matriz[row][col] = jewel.copy(row = row, col = col)
             selectedRow = -1
             selectedCol = -1
+            printBoard()
         }
-        printBoard()
     }
 
     fun printBoard() {
@@ -81,5 +65,26 @@ class Tablero {
         println("Dibujando tablero...")
         printBoard()
         println("Tablero dibujado...")
+    }
+
+    fun hasSelection(): Boolean {
+        return selectedRow != -1 && selectedCol != -1
+    }
+
+    fun validateMove(row: Int, col: Int) {
+        if (selectedCol == col && selectedRow == row) {
+            selectedRow = -1
+            selectedCol = -1
+            matriz[row][col].selected = false
+            Log.d("Unselected", "x: $row, y: $col")
+            return
+        }
+        if (hasSelection()) {
+            Log.d("Moved", "x: $row, y: $col")
+            move(row, col)
+        } else {
+            Log.d("Selected", "x: $row, y: $col")
+            select(row, col)
+        }
     }
 }

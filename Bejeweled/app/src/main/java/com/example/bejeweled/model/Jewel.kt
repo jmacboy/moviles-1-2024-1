@@ -4,11 +4,12 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 
-class Jewel(
+data class Jewel(
     var color: Int = getRandomColor(),
     var row: Int = 0,
     var col: Int = 0,
-    var type: JewelType = JewelType.NORMAL
+    var type: JewelType = JewelType.NORMAL,
+    var selected: Boolean = false
 ) {
     fun paint(canvas: Canvas, paint: Paint, ancho: Int, alto: Int) {
         val color = when (color) {
@@ -22,12 +23,24 @@ class Jewel(
         }
         paint.color = color
         canvas.drawRect(
-            (row * ancho + 1).toFloat(),
-            (col * alto + 1).toFloat(),
-            ((row + 1) * ancho - 1).toFloat(),
-            ((col + 1) * alto - 1).toFloat(),
+            (col * ancho + 1).toFloat(),
+            (row * alto + 1).toFloat(),
+            ((col + 1) * ancho - 1).toFloat(),
+            ((row + 1) * alto - 1).toFloat(),
             paint
         )
+        if (selected) {
+            paint.color = Color.WHITE
+//            paint.style = Paint.Style.STROKE
+            canvas.drawRect(
+                (col * ancho + 1).toFloat(),
+                (row * alto + 1).toFloat(),
+                ((col + 1) * ancho - 1).toFloat(),
+                ((row + 1) * alto - 1).toFloat(),
+                paint
+            )
+//            paint.style = Paint.Style.FILL
+        }
     }
 
     companion object { //para métodos y variables estáticas
