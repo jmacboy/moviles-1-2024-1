@@ -11,7 +11,7 @@ data class Jewel(
     var type: JewelType = JewelType.NORMAL,
     var selected: Boolean = false
 ) {
-    fun paint(canvas: Canvas, paint: Paint, ancho: Int, alto: Int) {
+    fun paint(canvas: Canvas, paint: Paint, width: Int, height: Int) {
         val color = when (color) {
             1 -> Color.BLACK
             2 -> Color.MAGENTA
@@ -23,20 +23,20 @@ data class Jewel(
         }
         paint.color = color
         canvas.drawRect(
-            (col * ancho + 1).toFloat(),
-            (row * alto + 1).toFloat(),
-            ((col + 1) * ancho - 1).toFloat(),
-            ((row + 1) * alto - 1).toFloat(),
+            (col * width + 1).toFloat(),
+            (row * height + 1).toFloat(),
+            ((col + 1) * width - 1).toFloat(),
+            ((row + 1) * height - 1).toFloat(),
             paint
         )
         if (selected) {
             paint.color = Color.WHITE
 //            paint.style = Paint.Style.STROKE
             canvas.drawRect(
-                (col * ancho + 1).toFloat(),
-                (row * alto + 1).toFloat(),
-                ((col + 1) * ancho - 1).toFloat(),
-                ((row + 1) * alto - 1).toFloat(),
+                (col * width + 1).toFloat(),
+                (row * height + 1).toFloat(),
+                ((col + 1) * width - 1).toFloat(),
+                ((row + 1) * height - 1).toFloat(),
                 paint
             )
 //            paint.style = Paint.Style.FILL
