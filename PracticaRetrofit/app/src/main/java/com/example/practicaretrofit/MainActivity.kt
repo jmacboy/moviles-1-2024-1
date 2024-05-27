@@ -86,7 +86,6 @@ class MainActivity : AppCompatActivity() {
                     .show()
                 val adapter = binding.lstPosts.adapter as PostListAdapter
                 adapter.updateData(postList)
-
             }
 
             override fun onFailure(res: Call<List<Post>>, t: Throwable) {
