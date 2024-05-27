@@ -26,6 +26,11 @@ class CategoryDetailActivity : AppCompatActivity() {
         }
         setupEventListeners()
         setupViewModelObservers()
+
+        val id = intent.getIntExtra("categoriaId", -1)
+        if (id != -1) {
+            model.loadCategory(id)
+        }
     }
 
     private fun setupViewModelObservers() {
@@ -33,6 +38,12 @@ class CategoryDetailActivity : AppCompatActivity() {
             if (it) {
                 finish()
             }
+        }
+        model.category.observe(this) {
+            if (it == null) {
+                return@observe
+            }
+            binding.txtCategoryName.editText?.setText(it?.nombre)
         }
     }
 

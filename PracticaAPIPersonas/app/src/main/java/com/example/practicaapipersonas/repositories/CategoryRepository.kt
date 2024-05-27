@@ -30,7 +30,11 @@ object CategoryRepository {
         })
     }
 
-    fun insertCategory(category: Categoria, success:  (Categoria) -> Unit, failure:  (Throwable) -> Unit) {
+    fun insertCategory(
+        category: Categoria,
+        success: (Categoria) -> Unit,
+        failure: (Throwable) -> Unit
+    ) {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://practico4moviles.jmacboy.com/api/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -45,6 +49,25 @@ object CategoryRepository {
             }
 
             override fun onFailure(res: Call<Categoria>, t: Throwable) {
+                failure(t)
+            }
+        })
+    }
+
+    fun getCategory(id: Int, success: (Categoria?) -> Unit, failure: (Throwable) -> Unit) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://practico4moviles.jmacboy.com/api/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service: APIProductosService =
+            retrofit.create(APIProductosService::class.java)
+        service.getCategoriaById(id).enqueue(object : Callback<Categoria?> {
+            override fun onResponse(res: Call<Categoria?>, response: Response<Categoria?>) {
+                success(response.body())
+            }
+
+            override fun onFailure(res: Call<Categoria?>, t: Throwable) {
                 failure(t)
             }
         })

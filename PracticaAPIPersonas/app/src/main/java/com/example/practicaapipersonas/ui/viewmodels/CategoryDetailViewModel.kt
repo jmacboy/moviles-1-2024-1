@@ -11,6 +11,10 @@ class CategoryDetailViewModel : ViewModel() {
         MutableLiveData<Boolean>(false)
     }
     val closeActivity: LiveData<Boolean> get() = _closeActivity
+    private val _category: MutableLiveData<Categoria?> by lazy {
+        MutableLiveData<Categoria?>(null)
+    }
+    val category: LiveData<Categoria?> get() = _category
 
     fun saveCategory(nombre: String) {
         val category = Categoria(
@@ -24,5 +28,15 @@ class CategoryDetailViewModel : ViewModel() {
                 it.printStackTrace()
             })
 
+    }
+
+    fun loadCategory(id: Int) {
+        CategoryRepository.getCategory(id,
+            success = {
+                _category.value = it
+            },
+            failure = {
+                it.printStackTrace()
+            })
     }
 }

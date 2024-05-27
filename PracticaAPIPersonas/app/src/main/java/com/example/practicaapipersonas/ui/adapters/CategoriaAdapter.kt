@@ -8,7 +8,7 @@ import com.example.practicaapipersonas.databinding.CategoriaItemLayoutBinding
 import com.example.practicaapipersonas.models.Categoria
 import com.example.practicaapipersonas.models.Categorias
 
-class CategoriaAdapter(val personaList: Categorias) :
+class CategoriaAdapter(val personaList: Categorias, val listener: OnCategoriaClickListener) :
     RecyclerView.Adapter<CategoriaAdapter.PersonaViewHolder>() {
 
 
@@ -28,7 +28,7 @@ class CategoriaAdapter(val personaList: Categorias) :
 
     override fun onBindViewHolder(holder: PersonaViewHolder, position: Int) {
         val persona = personaList[position]
-        holder.bind(persona)
+        holder.bind(persona, listener)
     }
 
     fun updateData(personaList: Categorias) {
@@ -38,11 +38,20 @@ class CategoriaAdapter(val personaList: Categorias) :
     }
 
     class PersonaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(categoria: Categoria) {
+        fun bind(categoria: Categoria, listener: OnCategoriaClickListener) {
             val binding = CategoriaItemLayoutBinding.bind(itemView)
             binding.apply {
                 lblCategoryName.text = "${categoria.nombre}"
+                lblCategoryName.setOnClickListener {
+                    listener.onCategoriaClick(categoria)
+                }
+                root.setOnClickListener { listener.onCategoriaClick(categoria) }
             }
+
         }
+    }
+
+    interface OnCategoriaClickListener {
+        fun onCategoriaClick(categoria: Categoria)
     }
 }

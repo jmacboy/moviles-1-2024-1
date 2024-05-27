@@ -10,11 +10,12 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.practicaapipersonas.R
 import com.example.practicaapipersonas.databinding.ActivityMainBinding
+import com.example.practicaapipersonas.models.Categoria
 import com.example.practicaapipersonas.models.Categorias
 import com.example.practicaapipersonas.ui.adapters.CategoriaAdapter
 import com.example.practicaapipersonas.ui.viewmodels.MainViewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CategoriaAdapter.OnCategoriaClickListener {
     lateinit var binding: ActivityMainBinding
     private val model: MainViewModel by viewModels()
 
@@ -54,8 +55,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         binding.lstPersonas.apply {
-            this.adapter = CategoriaAdapter(Categorias())
+            this.adapter = CategoriaAdapter(Categorias(), this@MainActivity)
             layoutManager = LinearLayoutManager(this@MainActivity)
         }
+    }
+
+    override fun onCategoriaClick(categoria: Categoria) {
+        val intent = Intent(this, CategoryDetailActivity::class.java)
+        intent.putExtra("categoriaId", categoria.id)
+        startActivity(intent)
     }
 }
