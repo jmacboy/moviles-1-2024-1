@@ -15,6 +15,28 @@ interface APIProductosService {
     @GET("productos")
     fun getProductos(): Call<Producto>
 
+    @GET("productos/{id}")
+    fun getProductoById(
+        @Path("id") id: Int
+    ): Call<Producto?>
+
+    @POST("productos")
+    fun insertProducto(
+        @Body producto: Producto
+    ): Call<Producto>
+
+    @PUT("productos/{id}")
+    fun updateProducto(
+        @Body producto: Producto,
+        @Path("id") id: Int
+    ): Call<Producto>
+
+    @DELETE("productos/{id}")
+    fun deleteProducto(
+        @Path("id") id: Int
+    ): Call<Void>
+
+
     @GET("categorias")
     fun getCategorias(): Call<Categorias>
 
@@ -33,8 +55,10 @@ interface APIProductosService {
         @Body categoria: Categoria,
         @Path("id") id: Int
     ): Call<Categoria>
+
     @DELETE("categorias/{id}")
     fun deleteCategoria(
         @Path("id") id: Int
     ): Call<Void>
+
 }
