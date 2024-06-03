@@ -41,7 +41,10 @@ class CategoriaAdapter(val personaList: Categorias, val listener: OnCategoriaCli
         fun bind(categoria: Categoria, listener: OnCategoriaClickListener) {
             val binding = CategoriaItemLayoutBinding.bind(itemView)
             binding.apply {
-                lblCategoryName.text = "${categoria.nombre}"
+                lblCategoryName.text = categoria.nombre
+                btnDeleteCategory.setOnClickListener {
+                    listener.onCategoriaDelete(categoria)
+                }
                 lblCategoryName.setOnClickListener {
                     listener.onCategoriaClick(categoria)
                 }
@@ -53,5 +56,6 @@ class CategoriaAdapter(val personaList: Categorias, val listener: OnCategoriaCli
 
     interface OnCategoriaClickListener {
         fun onCategoriaClick(categoria: Categoria)
+        fun onCategoriaDelete(categoria: Categoria)
     }
 }

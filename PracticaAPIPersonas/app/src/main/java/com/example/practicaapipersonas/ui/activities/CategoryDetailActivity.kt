@@ -11,6 +11,7 @@ import com.example.practicaapipersonas.databinding.ActivityCategoryDetailBinding
 import com.example.practicaapipersonas.ui.viewmodels.CategoryDetailViewModel
 
 class CategoryDetailActivity : AppCompatActivity() {
+    private var id: Int = 0
     lateinit var binding: ActivityCategoryDetailBinding
     private val model: CategoryDetailViewModel by viewModels()
 
@@ -27,7 +28,7 @@ class CategoryDetailActivity : AppCompatActivity() {
         setupEventListeners()
         setupViewModelObservers()
 
-        val id = intent.getIntExtra("categoriaId", -1)
+        id = intent.getIntExtra("categoriaId", -1)
         if (id != -1) {
             model.loadCategory(id)
         }
@@ -43,13 +44,13 @@ class CategoryDetailActivity : AppCompatActivity() {
             if (it == null) {
                 return@observe
             }
-            binding.txtCategoryName.editText?.setText(it?.nombre)
+            binding.txtCategoryName.editText?.setText(it.nombre)
         }
     }
 
     private fun setupEventListeners() {
         binding.btnSaveCategory.setOnClickListener {
-            model.saveCategory(binding.txtCategoryName.editText?.text.toString())
+            model.saveCategory(binding.txtCategoryName.editText?.text.toString(), id)
         }
     }
 }

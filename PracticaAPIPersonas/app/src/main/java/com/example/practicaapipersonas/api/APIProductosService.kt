@@ -5,6 +5,7 @@ import com.example.practicaapipersonas.models.Categorias
 import com.example.practicaapipersonas.models.Producto
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -32,5 +33,8 @@ interface APIProductosService {
         @Body categoria: Categoria,
         @Path("id") id: Int
     ): Call<Categoria>
-
+    @DELETE("categorias/{id}")
+    fun deleteCategoria(
+        @Path("id") id: Int
+    ): Call<Void>
 }

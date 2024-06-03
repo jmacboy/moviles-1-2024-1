@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.practiacapipersonas.repositories.CategoryRepository
 import com.example.practicaapipersonas.R
 import com.example.practicaapipersonas.databinding.ActivityMainBinding
 import com.example.practicaapipersonas.models.Categoria
@@ -64,5 +65,15 @@ class MainActivity : AppCompatActivity(), CategoriaAdapter.OnCategoriaClickListe
         val intent = Intent(this, CategoryDetailActivity::class.java)
         intent.putExtra("categoriaId", categoria.id)
         startActivity(intent)
+    }
+
+    override fun onCategoriaDelete(categoria: Categoria) {
+        CategoryRepository.deleteCategory(categoria.id!!,
+            success = {
+                model.fetchListaPersonas()
+            },
+            failure = {
+                it.printStackTrace()
+            })
     }
 }

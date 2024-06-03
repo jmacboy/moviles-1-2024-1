@@ -16,18 +16,28 @@ class CategoryDetailViewModel : ViewModel() {
     }
     val category: LiveData<Categoria?> get() = _category
 
-    fun saveCategory(nombre: String) {
+    fun saveCategory(nombre: String, id: Int) {
         val category = Categoria(
             nombre = nombre
         )
-        CategoryRepository.insertCategory(category,
-            success = {
-                _closeActivity.value = true
-            },
-            failure = {
-                it.printStackTrace()
-            })
-
+        if (id != 0) {
+            category.id = id
+            CategoryRepository.updateCategory(category,
+                success = {
+                    _closeActivity.value = true
+                },
+                failure = {
+                    it.printStackTrace()
+                })
+        } else {
+            CategoryRepository.insertCategory(category,
+                success = {
+                    _closeActivity.value = true
+                },
+                failure = {
+                    it.printStackTrace()
+                })
+        }
     }
 
     fun loadCategory(id: Int) {

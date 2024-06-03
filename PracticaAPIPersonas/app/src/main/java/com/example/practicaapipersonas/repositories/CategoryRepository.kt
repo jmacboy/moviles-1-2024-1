@@ -72,4 +72,52 @@ object CategoryRepository {
             }
         })
     }
+
+    fun updateCategory(
+        category: Categoria,
+        success: (Categoria) -> Unit,
+        failure: (Throwable) -> Unit
+    ) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://practico4moviles.jmacboy.com/api/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service: APIProductosService =
+            retrofit.create(APIProductosService::class.java)
+        val categoryId = category.id ?: 0
+        service.updateCategoria(category, categoryId).enqueue(object : Callback<Categoria> {
+            override fun onResponse(res: Call<Categoria>, response: Response<Categoria>) {
+                val objCategory = response.body()!!
+                success(objCategory)
+            }
+
+            override fun onFailure(res: Call<Categoria>, t: Throwable) {
+                failure(t)
+            }
+        })
+    }
+
+    fun deleteCategory(
+        id: Int,
+        success: () -> Unit,
+        failure: (Throwable) -> Unit
+    ) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://practico4moviles.jmacboy.com/api/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service: APIProductosService =
+            retrofit.create(APIProductosService::class.java)
+        service.deleteCategoria(id).enqueue(object : Callback<Void> {
+            override fun onResponse(res: Call<Void>, response: Response<Void>) {
+                success()
+            }
+
+            override fun onFailure(res: Call<Void>, t: Throwable) {
+                failure(t)
+            }
+        })
+    }
 }
