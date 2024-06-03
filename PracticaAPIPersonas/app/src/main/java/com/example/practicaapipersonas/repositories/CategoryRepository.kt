@@ -3,6 +3,7 @@ package com.example.practiacapipersonas.repositories
 import com.example.practicaapipersonas.api.APIProductosService
 import com.example.practicaapipersonas.models.Categoria
 import com.example.practicaapipersonas.models.Categorias
+import com.example.practicaapipersonas.repositories.RetrofitRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -11,10 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object CategoryRepository {
     fun getCategoryList(success: (Categorias?) -> Unit, failure: (Throwable) -> Unit) {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://practico4moviles.jmacboy.com/api/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        val retrofit = RetrofitRepository.getRetrofitInstance()
 
         val service: APIProductosService =
             retrofit.create(APIProductosService::class.java)
@@ -35,10 +33,7 @@ object CategoryRepository {
         success: (Categoria) -> Unit,
         failure: (Throwable) -> Unit
     ) {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://practico4moviles.jmacboy.com/api/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        val retrofit = RetrofitRepository.getRetrofitInstance()
 
         val service: APIProductosService =
             retrofit.create(APIProductosService::class.java)
@@ -55,10 +50,7 @@ object CategoryRepository {
     }
 
     fun getCategory(id: Int, success: (Categoria?) -> Unit, failure: (Throwable) -> Unit) {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://practico4moviles.jmacboy.com/api/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        val retrofit = RetrofitRepository.getRetrofitInstance()
 
         val service: APIProductosService =
             retrofit.create(APIProductosService::class.java)
@@ -78,10 +70,7 @@ object CategoryRepository {
         success: (Categoria) -> Unit,
         failure: (Throwable) -> Unit
     ) {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://practico4moviles.jmacboy.com/api/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        val retrofit = RetrofitRepository.getRetrofitInstance()
 
         val service: APIProductosService =
             retrofit.create(APIProductosService::class.java)
@@ -103,10 +92,7 @@ object CategoryRepository {
         success: () -> Unit,
         failure: (Throwable) -> Unit
     ) {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://practico4moviles.jmacboy.com/api/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        val retrofit = RetrofitRepository.getRetrofitInstance()
 
         val service: APIProductosService =
             retrofit.create(APIProductosService::class.java)
