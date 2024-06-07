@@ -5,29 +5,43 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
     tools:context=".ui.activities.CategoryDetailActivity">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtCategoryName"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:hint="Nombre"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/btnSaveCategory"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Guardar Categoría"
+        android:layout_height="0dp"
+        android:paddingStart="10dp"
+        android:paddingTop="30dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".ui.activities.CategoryDetailActivity">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtCategoryName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Nombre"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnSaveCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Guardar Categoría"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

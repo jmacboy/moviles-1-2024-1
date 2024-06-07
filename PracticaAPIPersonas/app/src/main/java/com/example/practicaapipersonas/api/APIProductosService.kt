@@ -3,6 +3,7 @@ package com.example.practicaapipersonas.api
 import com.example.practicaapipersonas.models.Categoria
 import com.example.practicaapipersonas.models.Categorias
 import com.example.practicaapipersonas.models.Producto
+import com.example.practicaapipersonas.models.Productos
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -13,7 +14,7 @@ import retrofit2.http.Path
 
 interface APIProductosService {
     @GET("productos")
-    fun getProductos(): Call<Producto>
+    fun getProductos(): Call<Productos>
 
     @GET("productos/{id}")
     fun getProductoById(

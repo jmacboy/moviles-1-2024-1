@@ -2,6 +2,9 @@ package com.example.practicaapipersonas.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -22,7 +25,7 @@ class MainActivity : AppCompatActivity(), CategoriaAdapter.OnCategoriaClickListe
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+//        enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -33,6 +36,22 @@ class MainActivity : AppCompatActivity(), CategoriaAdapter.OnCategoriaClickListe
         setupEventListeners()
         setupRecyclerView()
         setupViewModelListeners()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.action_go_next_page) {
+            val intent = Intent(this, CategoryDetailActivity::class.java)
+            startActivity(intent)
+        }else if (item.itemId == R.id.action_categorias) {
+            val intent = Intent(this, ProductoListActivity::class.java)
+            startActivity(intent)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onResume() {

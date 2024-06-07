@@ -1,6 +1,8 @@
 package com.example.practicaapipersonas.models
 
-data class Producto (
+typealias Productos = ArrayList<Producto>
+
+data class Producto(
     val id: Int,
     val nombre: String,
     val descripcion: String,
