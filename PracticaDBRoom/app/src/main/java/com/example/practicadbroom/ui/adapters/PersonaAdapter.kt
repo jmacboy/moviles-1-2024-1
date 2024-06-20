@@ -48,6 +48,7 @@ class PersonaAdapter(
                 lblPersonId.text = persona.id.toString()
                 lblPersonName.text = "${persona.nombre} ${persona.apellido}"
                 itemView.setOnClickListener { listener.onPersonaClick(persona) }
+                btnPersonDelete.setOnClickListener { listener.onPersonaDelete(persona) }
             }
         }
     }

@@ -1,20 +1,23 @@
 package com.example.practicadbroom.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.Room
 import com.example.practicadbroom.R
 import com.example.practicadbroom.databinding.ActivityMainBinding
-import com.example.practicadbroom.db.AppDatabase
 import com.example.practicadbroom.models.Persona
+import com.example.practicadbroom.repositories.PersonaRepository
 import com.example.practicadbroom.ui.adapters.PersonaAdapter
+import com.example.practicadbroom.ui.viewmodels.MainViewModel
 
 class MainActivity : AppCompatActivity(), PersonaAdapter.OnPersonaClickListener {
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
+    private val model: MainViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -25,18 +28,29 @@ class MainActivity : AppCompatActivity(), PersonaAdapter.OnPersonaClickListener 
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        doInsert()
         setupRecyclerView()
+        setupEventListeners()
+        setupViewModelObservers()
+    }
+
+    private fun setupViewModelObservers() {
+        model.personas.observe(this) {
+            it?.let {
+                (binding.rvPersonaList.adapter as PersonaAdapter).updateData(it as ArrayList<Persona>)
+            }
+        }
+    }
+
+    private fun setupEventListeners() {
+        binding.btnAddPersona.setOnClickListener {
+            val intent = Intent(this, PersonaDetailActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        val db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java, "database-name"
-        ).allowMainThreadQueries().build()
-        val personas = db.personaDao().getAll()
-        (binding.rvPersonaList.adapter as PersonaAdapter).updateData(personas as ArrayList<Persona>)
+        model.loadPersonas(this)
     }
 
     private fun setupRecyclerView() {
@@ -49,26 +63,13 @@ class MainActivity : AppCompatActivity(), PersonaAdapter.OnPersonaClickListener 
         }
     }
 
-    private fun doInsert() {
-        val db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java, "database-name"
-        ).allowMainThreadQueries().build()
-        db.personaDao().insert(
-            Persona(
-                "Juan",
-                "Perez",
-                30,
-                "CDMX",
-                "1990-01-01"
-            )
-        )
-    }
-
     override fun onPersonaClick(persona: Persona) {
-
+        val intent = Intent(this, PersonaDetailActivity::class.java)
+        intent.putExtra("id", persona.id)
+        startActivity(intent)
     }
 
     override fun onPersonaDelete(persona: Persona) {
+        model.deletePersona(this, persona)
     }
 }
