@@ -1,0 +1,13 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.PracticaAPIPersonas" parent="Theme.Material3.DayNight">
+        <!-- Customize your light theme here. -->
+         <item name="colorPrimary">@color/primary_color</item>
+        <item name="toolbarStyle">@style/Theme.Custom.Toolbar</item>
+    </style>
+
+    <style name="Theme.Custom.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/primary_color</item>
+    </style>
+    <style name="Theme.PracticaAPIPersonas" parent="Base.Theme.PracticaAPIPersonas" />
+</resources>
