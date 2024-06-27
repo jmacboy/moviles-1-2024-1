@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".ui.fragments.AboutFragment">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Acerca de la App"
+        android:textSize="20sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis ac tortor ut elementum. Pellentesque sollicitudin sem eu odio porta rutrum. Nullam finibus suscipit leo, congue sagittis nulla feugiat et. Nam auctor venenatis mi, sed elementum purus aliquet ac. Maecenas consequat massa sit amet dictum convallis. Aenean condimentum, purus non rutrum porta, ipsum metus mattis arcu, sit amet malesuada mi felis in tortor. Pellentesque mattis maximus tortor, non tempus lorem sodales rutrum. Nullam scelerisque elit eget hendrerit porttitor. Curabitur nulla nunc, aliquam quis iaculis pharetra, volutpat quis metus. Nunc eget risus quis tortor consectetur vestibulum. Integer tincidunt est ac hendrerit consequat. Integer elit ex, pretium ac nisi a, vehicula rutrum augue. Proin tincidunt ligula nec tortor dignissim aliquet.  Fusce sollicitudin nunc non felis rhoncus egestas. Phasellus scelerisque odio posuere eros aliquam scelerisque. Donec fermentum ac leo eu fermentum. Sed scelerisque nisl nec ex semper, non venenatis eros ullamcorper. Nullam leo ex, auctor ac fermentum sed, volutpat ut nisl. Vestibulum rutrum, odio sit amet iaculis rutrum, nibh magna finibus elit, ut luctus magna libero vitae ipsum. Nulla commodo, erat vitae lacinia pretium, nisi turpis lobortis mi, a tincidunt metus justo ultricies nunc. In vitae dui sed augue semper viverra ut nec libero. Mauris nec finibus tortor, eu euismod turpis. Duis a pretium libero, eget consectetur urna.  Praesent enim urna, dapibus nec tempor vitae, imperdiet eget libero. Duis sodales elementum malesuada. Pellentesque iaculis leo mi, condimentum auctor mi euismod nec. Duis aliquet, massa a molestie volutpat, lectus risus iaculis magna, in volutpat sem mauris sed quam. Etiam vitae nunc ac nisi venenatis vestibulum nec in orci. Aenean sed elit ex. Nam nec risus leo. Fusce facilisis vitae metus sit amet eleifend. Proin nec consectetur neque. Nulla interdum tortor eu ornare interdum.  Suspendisse quis magna eu lectus vulputate ornare vel a purus. Sed ut lacinia urna. Integer feugiat hendrerit imperdiet. Etiam eleifend semper faucibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque mattis tincidunt velit at faucibus. Aliquam facilisis euismod augue sed dignissim. Cras tincidunt ultrices lacus, non dignissim elit aliquam vitae. Morbi hendrerit arcu nec bibendum faucibus. Vestibulum sollicitudin egestas felis id efficitur. Suspendisse bibendum urna nec risus sagittis feugiat. Maecenas maximus luctus quam eget maximus. Nam semper sem sit amet ante tempor, eget volutpat erat vulputate. " />
+
+    </ScrollView>
+</FrameLayout>
